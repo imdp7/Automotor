@@ -1,0 +1,58 @@
+.Card-body {
+    width: 15rem;
+    margin: 1em;
+   
+}
+
+h3{
+        align-items: baseline;
+    }
+
+.Cardprice {
+    font-size: 0.47em;
+    color: navy;
+
+}
+.Cardtitle{
+    font-weight: 200;
+    margin: 0em;
+}
+
+.buttonx{
+    position: relative;
+
+
+    align-items: center;
+    margin: 2em;
+    
+
+
+.cartbutton{
+
+    
+    float: left;
+    text-align: start;
+    margin: 0.075em;
+}
+.addtocart {
+
+    float: right;
+    margin: 0.075em;
+    text-align: end;
+}
+}
+.card-img-top{
+    transition: transform 0.5s;
+    padding: auto;
+    object-fit: contain;
+    max-width: 15em;
+    max-height: 20em;
+    padding-bottom: 10px;  
+
+
+    :hover{
+     -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5); 
+    }
+}

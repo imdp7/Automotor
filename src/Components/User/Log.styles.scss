@@ -1,0 +1,12 @@
+
+.modal-body {
+    display: flex;
+    align-self: center;
+    align-content: space-between;
+    flex-direction: column;
+}
+.ant-modal{
+    opacity: 1;
+    transform: scale(1);
+    backdrop-filter: initial;
+}
