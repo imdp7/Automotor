@@ -6,7 +6,7 @@ import { Card } from 'antd';
 
 
 const gridStyle = {
-    width: '25%',
+    width: '33.3%',
     height:'auto',
     textAlign: 'center',
     bottom:'0'
@@ -24,7 +24,7 @@ function CardItem({props}) {
  
   
   const fetchItems = async () => {
-    const data = await fetch('https://jsonplaceholder.typicode.com/photos');
+    const data = await fetch('https://fakestoreapi.com/products');
       const items = await data.json();
       console.log(items); 
       setItems(items);

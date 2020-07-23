@@ -8,36 +8,24 @@ import { CartContext} from '../../../Context/context'
 
 
 function Cards  ({item }){
-  const {title, price, url,id} = item;
- const key = 'updatable';
-
-   const CartCtx = useContext(CartContext)
-
-// const addToCart = () => {
-
-//   message.loading({ content: 'Adding...', key });
-//   setTimeout(() => {
-//     message.success({ content: 'Added to Cart!', key, duration: 2 });
-//   }, 1000);
-// };
-
-
-const removeMessage = () => {
+  const {title, price, image,id} = item;
+  const CartCtx = useContext(CartContext)
+  
+  const key = 'updatable';
+  const removeMessage = () => {
     message.loading({ content: 'Removing...', key });
     setTimeout(() => {
      message.error({ content: 'Removed from Cart!', key, duration: 2 });
   }, 1000);
 };
 
-
-
     return (
       
       <div>
-      <Link to={`/Product/${id}`}><img className="card-img-top" variant="top" src={url}  alt="1"/></Link>
+      <Link to={`/Product/${id}`}><img className="card-img-top" variant="top" src={image} height="200px" width="150px" alt="1"/></Link>
       <div className="details">
       <Link to={`Product/${id}`}><h3>{title}</h3></Link>
-        <h2>{price}</h2>
+        <h3>{price}</h3>
 
         <div className="buttonx">
         <Link to={`/Product/${id}`}><Button className="cartbutton" key={id} onClick={<CardDetails/>} >View Product</Button></Link>

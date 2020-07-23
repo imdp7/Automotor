@@ -7,9 +7,7 @@ import Product from './Pages/product-page'
 import CardDetails from './Components/Cards/Card-details/card-details.component'
 import Company from './Pages/company.component'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
-import CartProvider from './Context/context';
-
-
+import {CartProvider} from './Context/context';
 
 function RouteWithSubRoutes(route) {
   return (
@@ -52,9 +50,8 @@ const routes = [
 function App() {
 return (
     <CartProvider>
-    <Router>
+      <Router>
       <div className="app">
-    
      <div className="header">
          <Head/>
      </div>
@@ -66,9 +63,8 @@ return (
          <Cards/>
        </Switch>
       </div>
-      
       </div>
-    </Router>
+     </Router>
 </CartProvider>
   );
 }

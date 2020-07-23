@@ -1,19 +1,47 @@
 import React, { createContext, useState } from 'react';
+import {message} from 'antd';
 
-export const CartContext = createContext(null)
+export const CartContext = createContext(null);
 
-export default function CartProvider({children}) {
+export function CartProvider({children}) {
     const [items, setItems] = useState([])
-    function addToCart (item) {
+
+ function addToCart (item) {
+        const key = 'updatable';
+  message.loading({ content: 'Adding...', key });
+  setTimeout(() => {
+    message.success({ content: 'Added to Cart!', key, duration: 2 });
+  }, 1000);
+
         setItems(prevState =>[...prevState, item])
     }
+
+    function itemWithQuantity(items) {
+        return items.reduce((acc, item) => {
+            const found = acc.find(_item => _item.id === item.id)
+        if(found){
+            found.quantity = found.quantity + 1
+        }else{
+            acc.push({
+                quantity:1,
+                ...item
+            })
+        }
+        return acc
+        }, [])
+    }
+
+    function Totalvalue(items) {
+        items.reduce((total, items) => total + items.price, 0)
+    }
+
     return(
         <CartContext.Provider
             value={{
-                items,
+                items: itemWithQuantity(items),
                 addToCart,
+                Totalvalue
             }}
-
         >
             {children}
         </CartContext.Provider>

@@ -1,26 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,useContext} from 'react';
 import { Row, Col } from 'antd';
-import {Button,Divider,Tooltip,message} from 'antd';
+import {Button,Divider,Tooltip,Descriptions} from 'antd';
 import { GoogleOutlined,PlusOutlined} from '@ant-design/icons';
 import RawForm from './Form/form.component'
 import './card-details.styles.scss'
-
-
+import { CartContext} from '../../../Context/context'
+// import MyGallery from '../Card-details/Image Thumbs/thumb.component'
 
 const gridStyle = {
     padding:'20px'
 };
 
-const key = 'updatable';
-
-const openMessage = () => {
-  message.loading({ content: 'Adding...', key });
-  setTimeout(() => {
-    message.success({ content: 'Added to Cart!', key, duration: 3 });
-  }, 1000);
-};
-
  const CardDetails =  ({match},props) =>{
+   const CartCtx = useContext(CartContext);
 
   useEffect(() => {
     fetchItem(); 
@@ -29,10 +21,9 @@ const openMessage = () => {
   const [item, setItem] = useState({});
   
   const fetchItem = async () => {
-    const data = await fetch(`https://jsonplaceholder.typicode.com/photos/${match.params.id}`);
+    const data = await fetch(`https://fakestoreapi.com/products/${match.params.id}`);
       const item = await data.json();
       setItem(item);
-     console.log(match.params.id); 
   };
 
         return (
@@ -40,8 +31,14 @@ const openMessage = () => {
   <div>
     <Row>
     <Col span={12} style={gridStyle}>
-        <img src={item.url} alt={item.albumId} />
+
+       <img src={item.image} alt={item.title} height="600px" width="550px" />
     <Divider dashed />
+      <Descriptions title="Product Description"  size="middle">
+        <Descriptions.Item >
+          {item.description}
+        </Descriptions.Item>
+      </Descriptions>
     </Col>
     <Col span={12} style={gridStyle}>
 
@@ -51,7 +48,7 @@ const openMessage = () => {
 
         <div className="container">
         <Tooltip title="Add to Cart" placement="bottom" color="red">
-        <Button size='large' style={{width:'50%'}} type="primary" onClick={openMessage}><PlusOutlined />Add to Cart</Button></Tooltip>
+        <Button size='large' style={{width:'50%'}} type="primary" onClick= {() => CartCtx.addToCart(item)}><PlusOutlined />Add to Cart</Button></Tooltip>
         <Tooltip title="Buy with G-pay" placement="bottom" color="orange">
         <Button size='large' style={{width:'50%'}}><GoogleOutlined />Buy with G-pay</Button></Tooltip>
         </div>

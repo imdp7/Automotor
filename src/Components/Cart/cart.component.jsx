@@ -7,15 +7,20 @@ const Cart= () => {
   const ctx = useContext(CartContext);
   const data = ctx.items.map(item =>({
     name:item.title,
-    url:item.thumbnailUrl
+    url:item.image,
+    price:item.price,
+    qty:item.quantity,
 
+    
   }))
+
 
   const columns = [
      {
         title: '',
         dataIndex: 'url',
-        render:theImageURL => <img src={theImageURL} alt={theImageURL} height="40%" width="25%"/>
+
+        render:theImageURL => <img src={theImageURL} alt={theImageURL} height="70px" width="70px"/>
      },
 
     
@@ -23,18 +28,21 @@ const Cart= () => {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
+
     },
 
     {
       title: 'Qty',
       dataIndex: 'qty',
       key: 'qty',
+
     },
     
     {
       title: 'Price',
       key: 'price',
       dataIndex: 'price',
+
       // render: tags => (
       //   <>
       //     {tags.map(tag => {
@@ -54,7 +62,7 @@ const Cart= () => {
     {
       title: '',
       key: 'remove',
-  
+      
       render: (text, record) => (
       //   <Space size="middle">
       //     <a href="/">Invite {record.name}</a>
@@ -66,41 +74,43 @@ const Cart= () => {
 
 
     return(
-    
-  
-    // <pain className="cart">
-      
-    //     <pl>
-    //       {ctx.items.map(item => (
-    //         <pi key={item.id}>
-    //         <piv>
-    //         <img className="card-img-top" variant="top" src={item.thumbnailUrl}  alt="1"/>
-    //           </piv>
-    //           <div>
-    //             <strong>{item.title}</strong> - ${item.price} (
-    //             {item.quantity})
-    //           </div>
-    //           {/* <div>
-    //             <button
-    //               onClick={ctx.removeProductFromCart.bind(
-    //                 this,
-    //                 item.id
-    //               )}
-    //             >
-    //               Remove from Cart
-    //             </button>
-    //           </div> */}
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   </main>
 
     <CartContext.Provider>
     <div>
         <div style={{padding:'2em', fontSize:'25px', display:'flex'}}>
       Items in your Cart !!
       </div>
-      <Table rowKey="uid" columns={columns} dataSource={data} showSorterTooltip="true" size="large" pagination="true" tableLayout="auto" />
+      <Table rowKey="uid" columns={columns} dataSource={data} size="large" pagination="true" loading="true"
+        summary={pageData => {
+        let totalval = 0;
+        let totalqty = 0;
+        let total=0;
+        let totalvalue =0;
+        pageData.forEach(({ price, qty }) => {
+          
+            totalqty += qty; 
+            total = qty*price
+            totalval += total
+            console.log({total})
+        });
+            totalvalue = Math.round(totalval * 100) / 100
+
+        return (
+          <>
+            
+            <Table.Summary.Row>
+              <Table.Summary.Cell colSpan={2}>Balance</Table.Summary.Cell>
+              <Table.Summary.Cell >
+                {totalqty}
+              </Table.Summary.Cell>
+              <Table.Summary.Cell>
+                {totalvalue}
+              </Table.Summary.Cell>
+            </Table.Summary.Row>
+          </>
+        );
+      }}
+      />
     </div>
     <div style={{padding:'20px'}}>
     <Button size="large" style={{float:'right'}}>Continue to Checkout</Button>
