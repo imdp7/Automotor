@@ -80,7 +80,7 @@ const Cart= () => {
         <div style={{padding:'2em', fontSize:'25px', display:'flex'}}>
       Items in your Cart !!
       </div>
-      <Table rowKey="uid" columns={columns} dataSource={data} size="large" pagination="true" loading="true"
+      <Table rowKey="uid" columns={columns} dataSource={data} size="large"  loading="true"
         summary={pageData => {
         let totalval = 0;
         let totalqty = 0;
@@ -91,20 +91,19 @@ const Cart= () => {
             totalqty += qty; 
             total = qty*price
             totalval += total
-            console.log({total})
         });
             totalvalue = Math.round(totalval * 100) / 100
-
+          console.log({totalvalue})
         return (
           <>
             
             <Table.Summary.Row>
-              <Table.Summary.Cell colSpan={2}>Balance</Table.Summary.Cell>
+              <Table.Summary.Cell colSpan={2}>Total</Table.Summary.Cell>
               <Table.Summary.Cell >
                 {totalqty}
               </Table.Summary.Cell>
               <Table.Summary.Cell>
-                {totalvalue}
+                ${totalvalue}
               </Table.Summary.Cell>
             </Table.Summary.Row>
           </>

@@ -31,16 +31,12 @@ export function CartProvider({children}) {
         }, [])
     }
 
-    function Totalvalue(items) {
-        items.reduce((total, items) => total + items.price, 0)
-    }
-
     return(
         <CartContext.Provider
             value={{
                 items: itemWithQuantity(items),
-                addToCart,
-                Totalvalue
+                addToCart
+                
             }}
         >
             {children}

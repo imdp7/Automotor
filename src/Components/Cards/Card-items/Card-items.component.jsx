@@ -25,7 +25,7 @@ function Cards  ({item }){
       <Link to={`/Product/${id}`}><img className="card-img-top" variant="top" src={image} height="200px" width="150px" alt="1"/></Link>
       <div className="details">
       <Link to={`Product/${id}`}><h3>{title}</h3></Link>
-        <h3>{price}</h3>
+        <h3>${price}</h3>
 
         <div className="buttonx">
         <Link to={`/Product/${id}`}><Button className="cartbutton" key={id} onClick={<CardDetails/>} >View Product</Button></Link>

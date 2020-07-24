@@ -6,8 +6,8 @@ import { Card } from 'antd';
 
 
 const gridStyle = {
-    width: '33.3%',
-    height:'auto',
+    width: '25%',
+    height:'55vh',
     textAlign: 'center',
     bottom:'0'
   };

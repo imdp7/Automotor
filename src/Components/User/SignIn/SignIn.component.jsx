@@ -11,6 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { message } from 'antd';
+import { GoogleLogin } from 'react-google-login';
+import './SignIn.styles.scss'
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,12 +33,19 @@ const useStyles = makeStyles((theme) => ({
     
   },
   submit: {
-    margin: theme.spacing(1, 0, 1),
+    margin: theme.spacing(1, 1, 1),
+    justifyContent:"center"
   },
 }));
 
-const key = 'updatable';
+function onSuccess(googleUser) {
+  console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+}
+function onFailure(error) {
+  console.log(error, 'Try Again');
+}
 
+const key = 'updatable';
 const openMessage = () => {
   message.loading({ content: 'Loading...', key });
   setTimeout(() => {
@@ -107,17 +117,16 @@ function SignIn() {
           >
             Sign In
           </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="outlined"
-            color="primary"
+          <GoogleLogin
+            clientId="342114596383-rvnb56psi9u9d9gqjkb74hhdhfpg4ij9.apps.googleusercontent.com"
+            buttonText="Login with Google"
+            cookiePolicy={'single_host_origin'}
+            isSignedIn={true}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
             className={classes.submit}
-            onClick={handleSubmit}
-          >
-            Sign up with Google
-          </Button>
-
+            />
+            
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
@@ -137,5 +146,6 @@ function SignIn() {
     </Container>
     
   );
+
 }
 export default SignIn;
