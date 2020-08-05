@@ -5,7 +5,7 @@ export const CartContext = createContext(null);
 
 export function CartProvider({children}) {
     const [items, setItems] = useState([])
-
+    
  function addToCart (item) {
         const key = 'updatable';
   message.loading({ content: 'Adding...', key });
@@ -18,7 +18,7 @@ export function CartProvider({children}) {
 
     function itemWithQuantity(items) {
         return items.reduce((acc, item) => {
-            const found = acc.find(_item => _item.id === item.id)
+            const found = acc.find(_item => _item.Handle === item.Handle)
         if(found){
             found.quantity = found.quantity + 1
         }else{

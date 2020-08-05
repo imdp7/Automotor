@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext, Fragment} from 'react';
 import { Table, Button } from 'antd';
 import {CartContext} from '../../Context/context'
 
@@ -6,11 +6,11 @@ import {CartContext} from '../../Context/context'
 const Cart= () => {
   const ctx = useContext(CartContext);
   const data = ctx.items.map(item =>({
-    name:item.title,
-    url:item.image,
-    price:item.price,
+    name:item.Title,
+    url:item.Image,
+    price:item.Price,
     qty:item.quantity,
-
+    id:item.Handle
     
   }))
 
@@ -19,8 +19,8 @@ const Cart= () => {
      {
         title: '',
         dataIndex: 'url',
-
-        render:theImageURL => <img src={theImageURL} alt={theImageURL} height="70px" width="70px"/>
+        key:'id',
+        render:Image => <img src={Image} alt={Image} height="80px" width="70px"/>
      },
 
     
@@ -80,7 +80,7 @@ const Cart= () => {
         <div style={{padding:'2em', fontSize:'25px', display:'flex'}}>
       Items in your Cart !!
       </div>
-      <Table rowKey="uid" columns={columns} dataSource={data} size="large"  loading="true"
+      <Table rowKey="id" columns={columns} dataSource={data} size="large"  loading="true"
         summary={pageData => {
         let totalval = 0;
         let totalqty = 0;
@@ -93,9 +93,8 @@ const Cart= () => {
             totalval += total
         });
             totalvalue = Math.round(totalval * 100) / 100
-          console.log({totalvalue})
         return (
-          <>
+          <Fragment>
             
             <Table.Summary.Row>
               <Table.Summary.Cell colSpan={2}>Total</Table.Summary.Cell>
@@ -106,7 +105,7 @@ const Cart= () => {
                 ${totalvalue}
               </Table.Summary.Cell>
             </Table.Summary.Row>
-          </>
+          </Fragment>
         );
       }}
       />

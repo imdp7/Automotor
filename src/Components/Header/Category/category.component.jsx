@@ -1,37 +1,29 @@
 import React from 'react';
-import { Menu,Dropdown} from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Menu,} from 'antd';
 
 const { SubMenu } = Menu;
 
-const menu = (
-    <Menu>
-      <Menu.ItemGroup title="Group title">
-        <Menu.Item>1st menu item</Menu.Item>
-        <Menu.Item>2nd menu item</Menu.Item>
-      </Menu.ItemGroup>
-      <SubMenu title="sub menu">
-        <Menu.Item>3rd menu item</Menu.Item>
-        <Menu.Item>4th menu item</Menu.Item>
-      </SubMenu>
-      <SubMenu title="disabled sub menu" disabled>
-        <Menu.Item>5d menu item</Menu.Item>
-        <Menu.Item>6th menu item</Menu.Item>
-      </SubMenu>
-    </Menu>
-);
+const handleClick = e => {
+  console.log('click ', e);
+};
+
 function Category(params) {
     
 
     return (
+      <Menu onClick={handleClick} mode="horizontal" >
+      <SubMenu title="Category" key="2">
+        <Menu.Item title="1"> 1</Menu.Item>
+        <SubMenu title="2">
+      <Menu.Item>1rd menu item</Menu.Item>
+      <Menu.Item>2th menu item</Menu.Item>
+    </SubMenu>
+        <Menu.Item title="3">3</Menu.Item>
+        <Menu.Item title="4">4</Menu.Item>
+        <Menu.Item title="5">5</Menu.Item>
 
-     <Dropdown overlay={menu}>
-
-      Category <DownOutlined />
-    
-  </Dropdown>
-
-
+    </SubMenu>
+    </Menu>
 );
 
 }

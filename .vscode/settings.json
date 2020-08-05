@@ -4,6 +4,7 @@
         "antcarousel",
         "automotor",
         "browserslist",
+        "btns",
         "butons",
         "buttonx",
         "caousel",
@@ -17,6 +18,7 @@
         "successfull",
         "totalqty",
         "totalval",
-        "totalvalue"
+        "totalvalue",
+        "viewprod"
     ]
 }
