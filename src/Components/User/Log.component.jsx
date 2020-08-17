@@ -76,7 +76,7 @@ const LoginModal = () => {
     overlay={menu}
     placement="bottomCenter" arrow
     trigger={['click']}
-    overlayStyle={{position:'fixed',background:'#f5f5f5',padding:'20px',borderRadius:'20px',PaddingTop:'20px'}}
+    overlayStyle={{background:'#f5f5f5',padding:'20px',borderRadius:'20px',position:'fixed',}}
     >
 
       <a href="/">Login</a>

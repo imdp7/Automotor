@@ -7,12 +7,12 @@ import PropTypes from "prop-types";
 import axios from 'axios'
 
 const gridStyle = {
-    width: 'auto',
-    height:'auto',
-    margin:'10px 10px',
-    padding: '10px 0px',
-
-    // textAlign:'center'
+    // height:'auto',
+    // width:'auto',
+    display:'grid',
+    gridAutoRows: 'auto',
+    gridGap: '1rem',
+    gridTemplateColumns: 'repeat(auto-fill, 1fr)',
   };
 
   const ARRAY_SIZE = 32;
@@ -43,19 +43,21 @@ function CardItem({scrollContainer}) {
 
   useEffect(() => {
     handleLoadMore()
-  },[] );
+  } ,[]);
 
   function handleLoadMore  ()  {
     setLoading(true);
-    const apiRoot = 'http://localhost:4000/products?Type=Body Wash'
+    const apiRoot = 'http://localhost:4000/products?Type=Laundry Care'
     axios.get(apiRoot).then((res) => {
-      loadItems(items, items.length).then(newArray => {
-       setItems([...res.data, ...items]);
+      const item = res.data
+       loadItems(items, items.length).then(newArray => {
+       setItems([...item, ...items]);
+ 
+       setLoading(false);
       });
-      setLoading(false);
     });
   }
-  
+ 
   const infiniteRef = useInfiniteScroll({
     loading,
     // This value is set to "true" for this demo only. You will need to
@@ -89,3 +91,4 @@ CardItem.propTypes = {
 
 
 export default CardItem;
+

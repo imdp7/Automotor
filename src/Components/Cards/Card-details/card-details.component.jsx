@@ -11,7 +11,8 @@ const gridStyle = {
     padding:'20px'
 };
 
- const CardDetails =  ({match}) =>{
+ const CardDetails =  ({match},items) =>{
+  const {Title, Price, Image,Body} = items;
    const CartCtx = useContext(CartContext);
 
   useEffect(() => {
@@ -20,13 +21,13 @@ const gridStyle = {
   
   const [item, setItem] = useState({});
     const fetchItem = async () => {
-    const apiRoot = ('http://localhost:4000/products/_${match.params.Handle}');
+    // eslint-disable-next-line no-template-curly-in-string
+    const apiRoot = `http://localhost:4000/products?Handle=${match.params.Handle}`;
     axios
     .get(apiRoot)
     .then((res) => {
-    // const data = await fetch(`http://localhost:4000/products/_${match.params.Handle}`);
-    //   const item = await data.json();
-      setItem(item);
+    const item = res.data
+    setItem(item);
     });
   };
 
@@ -36,20 +37,20 @@ const gridStyle = {
     <Row>
     <Col span={12} style={gridStyle}>
 
-       <img src={item.Image} alt={item.Title} height="600px" width="550px" />
+       <img src={Image} alt={Title} height="600px" width="550px" />
     <Divider dashed />
       <Descriptions title="Product Description"  size="middle">
         <Descriptions.Item >
-          {item.Body}
+          {Body}
         </Descriptions.Item>
       </Descriptions>
     </Col>
     <Col span={12} style={gridStyle}>
 
-    <h1>{item.Title}</h1>
+    <h1>{Title}</h1>
 
             <RawForm/>
-          <h2>Price: {item.Price}</h2>
+          <h2>Price: {Price}</h2>
         <div className="container">
         <Tooltip title="Add to Cart" placement="bottom" color="red">
         <Button size='large' style={{width:'50%'}} type="primary" onClick= {() => CartCtx.addToCart(item)}><PlusOutlined />Add to Cart</Button></Tooltip>

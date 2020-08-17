@@ -27,10 +27,12 @@ h3{
     float: left;
     text-align: center;
 }
+
 .addtocart {
     float: right;
     text-align: center;
-    
+    display: block;
+    padding: '10px';
 }
 }
 .card-img-top{
