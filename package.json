@@ -16,7 +16,7 @@
     "firebase": "^7.17.0",
     "history": "1",
     "magic-scroll": "0.0.12",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.1.1",
     "react-dom": "^16.13.1",
